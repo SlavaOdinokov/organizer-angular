@@ -1,0 +1,45 @@
+.organizer {
+  color: #d9dbda;
+  padding: 0 .5rem;
+
+  &__input {
+    display: block;
+    width: 100%;
+    padding: .8rem 1rem;
+    font-size: 1rem;
+    border: none;
+    outline: none;
+    margin-bottom: .5rem;
+    border-radius: 10px;
+    font-family: 'Roboto', sans-serif;
+    color: #fff;
+    background: #1d1e20;
+
+    &::placeholder {
+      color: #999b9a;
+      font-family: 'Roboto', sans-serif;
+    }
+  }
+
+  &__task {
+    color: #fff;
+    padding: 0 1.2rem;
+    position: relative;
+
+    &:before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #e87b29;
+    }
+  }
+}
+
+main {
+  margin: 1rem 0;
+}
