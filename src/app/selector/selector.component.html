@@ -1,0 +1,9 @@
+<p class="selector">
+  <i class="material-icons md-white" (click)="go(-1)">navigate_before</i>
+
+  <span>
+    {{ dateService.date | async | moment }}
+  </span>
+
+  <i class="material-icons md-white" (click)="go(1)">navigate_next</i>
+</p>
