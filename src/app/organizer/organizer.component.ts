@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DateService } from '../shared/date.service';
+import { NotesService, Note } from '../shared/notes.service';
 
 @Component({
   selector: 'app-organizer',
@@ -11,7 +12,8 @@ export class OrganizerComponent implements OnInit {
 
   form: FormGroup
 
-  constructor(public dateService: DateService) { }
+  constructor(public dateService: DateService,
+              private notesService: NotesService) { }
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -21,8 +23,15 @@ export class OrganizerComponent implements OnInit {
 
   submit() {
     const { title } = this.form.value
-    console.log(title)
 
+    const note: Note = {
+      title,
+      date: this.dateService.date.value.format('DD-MM-YYYY')
+    }
+
+    this.notesService.create(note).subscribe(note => {
+      this.form.reset()
+    }, err => console.error(err))
   }
 
 }
