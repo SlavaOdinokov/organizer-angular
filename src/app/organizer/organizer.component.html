@@ -5,12 +5,15 @@
   <hr />
 
   <main>
-    <ul>
-      <li class="organizer__task">
-        <span>Some Task</span>
-        <i class="material-icons">delete</i>
+    <ul *ngIf="notes.length; else noNotes">
+      <li class="organizer__task" *ngFor="let note of notes">
+        <span>{{ note.title }}</span>
+        <i class="material-icons" (click)="remove(note)">delete</i>
       </li>
     </ul>
+    <ng-template #noNotes>
+      <p class="text-center">No notes yet...</p>
+    </ng-template>
   </main>
 
   <footer>

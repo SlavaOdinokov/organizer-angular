@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import * as moment from 'moment';
 import { DateService } from '../shared/date.service';
+import { NotesService, Note } from '../shared/notes.service';
+import { switchMap } from 'rxjs/operators';
 
 interface Day {
   value: moment.Moment
@@ -21,10 +23,18 @@ interface Week {
 export class CalendarComponent implements OnInit {
 
   calendar: Week[]
+  notes: Note[] = []
 
-  constructor(public dateService: DateService) { }
+  constructor(public dateService: DateService,
+              private notesService: NotesService) { }
 
   ngOnInit() {
+    this.dateService.date.pipe(
+      switchMap(value => this.notesService.load(value))
+    ).subscribe(notes => {
+      this.notes = notes
+    })
+
     this.dateService.date.subscribe(this.generate.bind(this))
   }
 
