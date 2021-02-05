@@ -1,6 +1,6 @@
 <section class="organizer">
   <header>
-    Organizer: <strong>04/02/2021</strong>
+    Organizer: <strong>{{ dateService.date | async | moment:'DD.MM.YYYY' }}</strong>
   </header>
   <hr />
 
@@ -8,28 +8,23 @@
     <ul>
       <li class="organizer__task">
         <span>Some Task</span>
-      </li>
-      <li class="organizer__task">
-        <span>Some Task</span>
-      </li>
-      <li class="organizer__task">
-        <span>Some Task</span>
-      </li>
-      <li class="organizer__task">
-        <span>Some Task</span>
-      </li>
-      <li class="organizer__task">
-        <span>Some Task</span>
+        <i class="material-icons">delete</i>
       </li>
     </ul>
   </main>
 
   <footer>
-    <form>
-      <input class="organizer__input" type="text" placeholder="New note">
+    <form (ngSubmit)="submit()" [formGroup]="form">
+      <input
+        class="organizer__input"
+        type="text"
+        placeholder="New note"
+        formControlName="title"
+      />
       <button
         type="submit"
         class="btn btn-primary btn-block"
+        [disabled]="form.invalid"
       >
         Add new note
       </button>
